@@ -54,5 +54,5 @@ path = 'Database.db'
 cnx, cursor = sql_connector(path)
 create_table(cnx, cursor)
 date = date()
-city, country, main, icon = weather('35', '51')
+city, country, main, icon = weather()
 insert_data(date, city, country, main, icon)
