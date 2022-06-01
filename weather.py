@@ -17,7 +17,7 @@ def proccess_data(data):
             data['weather'][0]['icon']]
 
 
-def weather(lat = '35.7', lon = '51.4', appid = '0ba870d2feeb31ce3e65df98f16623ff'):
+def weather(lat = '35.715', lon = '51.404', appid = '0ba870d2feeb31ce3e65df98f16623ff'):
     url = 'http://api.openweathermap.org/data/2.5/weather?'
     r = requests.get(url+'lat='+lat+'&lon='+lon+'&appid='+appid)
     return proccess_data(r.json())
@@ -35,13 +35,13 @@ def sql_connector(path):
 
 
 def create_table(cnx, cursor):
-    query = 'CREATE TABLE IF NOT EXISTS btc (date text, city text, country text, main text, icon text);'
+    query = 'CREATE TABLE IF NOT EXISTS weather (date text, city text, country text, main text, icon text);'
     cursor.execute(query)
     cnx.commit()
 
 
 def insert_data(date, city, country, main, icon):
-    query = "INSERT INTO btc VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\')"%(date,
+    query = "INSERT INTO weather VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\')"%(date,
                                                                                city,
                                                                                country,
                                                                                main,
@@ -50,7 +50,7 @@ def insert_data(date, city, country, main, icon):
     cnx.commit()
 
 
-path = 'Bitcoin.db'
+path = 'Database.db'
 cnx, cursor = sql_connector(path)
 create_table(cnx, cursor)
 date = date()
